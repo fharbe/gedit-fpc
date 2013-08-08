@@ -1,0 +1,20 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=FPRun
+# Shortcut=<Control>F5
+# Languages=pascal
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+
+# FPRun (FreePascalRun) gedit Plugin Copyright (c) 2011 Florian Harbecke
+
+DOC_DIR=`echo ${GEDIT_CURRENT_DOCUMENT_DIR} | sed "s#$HOME#~#"`
+NAME=${GEDIT_CURRENT_DOCUMENT_NAME%.pas}
+TEXT="Press any key to continue"
+
+echo "Running $NAME ($DOC_DIR)"
+# Using & so gedit won't freeze till terminal is closed
+gnome-terminal -t "$NAME ($DOC_DIR) - Terminal" -e "bash -c '${GEDIT_CURRENT_DOCUMENT_PATH%.pas}; echo $TEXT; read -n1 -s'" &
